@@ -1,12 +1,13 @@
-import { NgModule }           from '@angular/core';
-import { CommonModule }       from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { {{baseComponent}} }   from './{{baseComponentFile}}.component';
+import { {{baseComponent}}Component } from './{{baseComponentFile}}.component';
+import { {{baseComponent}}RouteModule } from './routes/{{baseComponentFile}}-route.module';
 
 @NgModule({
-  imports:      [ CommonModule ],
-  declarations: [ ],
+  imports:      [ CommonModule, {{baseComponent}}RouteModule ],
+  declarations: [ {{baseComponent}}Component ],
   exports:      [ ],
   providers:    [ ]
 })
-export class {{baseModule}} { }
+export class {{baseComponent}}Module { }

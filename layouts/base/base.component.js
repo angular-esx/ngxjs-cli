@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './templates/{{baseComponentFile}}.component.html',
   styleUrls: ['./styles/{{baseComponentFile}}.component.scss'],
 })
-export class {{baseComponent}} {
+export class {{baseComponent}}Component {
   constructor() { }
 }

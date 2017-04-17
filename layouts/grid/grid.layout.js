@@ -14,6 +14,7 @@ function generateGrid(component, rows, cols, toolbar, sidenav) {
     fs.mkdirSync(componentFileName);
     fs.mkdirSync(path.join(componentFileName, 'styles'));
     fs.mkdirSync(path.join(componentFileName, 'templates'));
+    fs.mkdirSync(path.join(componentFileName, 'routes'));
   } else {
     console.log('Folder is exists!');
 
