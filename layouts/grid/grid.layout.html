@@ -1,0 +1,17 @@
+{{#if toolbar}}
+<ngx-toolbar></ngx-toolbar>
+{{/if}}
+
+{{#if sidenav}}
+<ngx-side-nav></ngx-side-nav>
+{{/if}}
+
+<ngx-grid>
+{{#times rows}}
+  <ngx-row>
+    {{#times cols}}
+      <ngx-col>Col {{@index}}</ngx-col>
+    {{/times}}
+  </ngx-row>
+{{/times}}
+</ngx-grid>
