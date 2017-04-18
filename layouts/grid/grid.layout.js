@@ -90,8 +90,7 @@ function readFiles(dirname) {
     } else {
       let filesInDirectory = readFiles(pathFile);
       Object.keys(filesInDirectory).map(function (file) {
-        var newFile = path.join(filename, file);
-        files[newFile] = filesInDirectory[file]
+        files[path.join(filename, file)] = filesInDirectory[file];
       })
     }
   });
