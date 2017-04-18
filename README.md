@@ -5,7 +5,7 @@ This is a tool to generate layouts for ngxjs
 
 
 ### Usages
-```ngx g <Page> --main layout --toolbar --side-nav "left|right"```
+```ngx g <Component> --main <layout> --toolbar --side-nav <left|right>```
 
 Example:
 
