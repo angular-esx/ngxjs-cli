@@ -35,7 +35,13 @@ function generateGrid(component, rows, cols, toolbar, sidenav) {
     });
   })
 
-  var source = fs.readFileSync(path.resolve(__dirname, 'grid.layout.html'), 'utf-8');
+  generateTemplate(componentFileName, rows, cols, toolbar, sidenav);
+
+  generateStyle(componentFileName, toolbar, sidenav);
+}
+
+function generateTemplate(componentFileName, rows, cols, toolbar, sidenav) {
+  var sourceHTML = fs.readFileSync(path.resolve(__dirname, 'grid.layout.html'), 'utf-8');
 
   var context = {
     rows: rows,
@@ -44,9 +50,27 @@ function generateGrid(component, rows, cols, toolbar, sidenav) {
     sidenav: sidenav
   };
 
-  var html = generate(source, context);
+  var html = generate(sourceHTML, context);
 
   fs.writeFile(path.join(componentFileName, 'templates', componentFileName + '.component.html'), html, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+  });
+}
+
+function generateStyle(componentFileName, toolbar, sidenav) {
+  var sourceSCSS = fs.readFileSync(path.resolve(__dirname, 'styles', 'grid.component.scss'), 'utf-8');
+
+  var context = {
+    toolbar: toolbar,
+    sidenav: sidenav,
+    baseComponentFile: componentFileName
+  };
+
+  var scss = generate(sourceSCSS, context);
+
+  fs.writeFile(path.join(componentFileName, 'styles', componentFileName + '.component.scss'), scss, function (err) {
     if (err) {
       return console.log(err);
     }

@@ -1,0 +1,15 @@
+{{#if toolbar}}
+.ngx-toolbar {
+  color: red;
+}
+{{/if}}
+
+{{#if sidenav}}
+.ngx-side-nav {
+  color: blue;
+}
+{{/if}}
+
+.{{baseComponentFile}} {
+  display: block;
+}
