@@ -6,7 +6,7 @@
 <ngx-side-nav></ngx-side-nav>
 {{/if}}
 
-<ngx-grid>
+<ngx-grid {{#if fluid}}type="fluid"{{/if}}>
 {{#times rows}}
   <ngx-row>
     {{#times cols}}

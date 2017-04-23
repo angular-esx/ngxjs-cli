@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 var generate = require('../../utils/generate');
 
-function generateGrid(component, rows, cols, toolbar, sidenav) {
+function generateGrid(component, rows, cols, toolbar, sidenav, fluid) {
   if (!rows) rows = 2;
   if (!cols) cols = 2;
 
@@ -35,19 +35,20 @@ function generateGrid(component, rows, cols, toolbar, sidenav) {
     });
   })
 
-  generateTemplate(componentFileName, rows, cols, toolbar, sidenav);
+  generateTemplate(componentFileName, rows, cols, toolbar, sidenav, fluid);
 
-  generateStyle(componentFileName, toolbar, sidenav);
+  generateStyle(componentFileName, toolbar, sidenav, fluid);
 }
 
-function generateTemplate(componentFileName, rows, cols, toolbar, sidenav) {
+function generateTemplate(componentFileName, rows, cols, toolbar, sidenav, fluid) {
   var sourceHTML = fs.readFileSync(path.resolve(__dirname, 'grid.layout.html'), 'utf-8');
 
   var context = {
     rows: rows,
     cols: cols,
     toolbar: toolbar,
-    sidenav: sidenav
+    sidenav: sidenav,
+    fluid: fluid,
   };
 
   var html = generate(sourceHTML, context);
@@ -59,7 +60,7 @@ function generateTemplate(componentFileName, rows, cols, toolbar, sidenav) {
   });
 }
 
-function generateStyle(componentFileName, toolbar, sidenav) {
+function generateStyle(componentFileName, toolbar, sidenav, fluid) {
   var sourceSCSS = fs.readFileSync(path.resolve(__dirname, 'styles', 'grid.component.scss'), 'utf-8');
 
   var context = {

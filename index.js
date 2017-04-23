@@ -10,6 +10,7 @@ program
   .option('--main <main>', 'Generator main layout grid|tabbar|list|feed')
   .option('--rows [rows]', 'Rows number')
   .option('--cols [cols]', 'Cols number')
+  .option('--fluid [fluid]', 'Use fluid')
   .option('--side-nav [side-nav]', 'Generator side-nav left or right | Default left')
   .option('--toolbar', 'Generator toolbar')
   .action(function (cmd, component) {
@@ -19,12 +20,13 @@ program
     let toolbar = program.toolbar;
     let rows = program.rows;
     let cols = program.cols;
+    let fluid = program.fluid;
 
     if (cmd === 'g' || cmd === 'generate') {
 
       if (main != undefined) {
         if (main === 'grid') {
-          generateGrid(component, rows, cols, sideNav, toolbar);
+          generateGrid(component, rows, cols, sideNav, toolbar, fluid);
         } else if (main === 'tabbar') {
           console.log('In Process');
           // generateTabbar('tabbar', component, componentFile);
