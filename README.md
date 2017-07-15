@@ -5,18 +5,13 @@ This is a tool to generate layouts for ngxjs
 
 
 ### Usages
-```ngx g <Component> --main <layout> --toolbar --side-nav <left|right>```
+```ngx componany <Component> --output <outputPath> --config <configPath>```
 
 Example:
 
-Create ContactUs uses grid layout 4 rows, 3 cols
+Create ContactUs
 
-```ngx g ContactUs --main grid --rows 4 --cols 3```
-
-Create ContactUs uses grid layout 4 rows, 3 cols, and has toolbar and left side nav
-
-```ngx g ContactUs --main grid --rows 4 --cols 3 --toolbar --side-nav left```
-
+```ngx componany ContactUs --output ./demo/ --config ./demo/abc.config.js```
 
 ### Development
 

@@ -3,15 +3,31 @@
 {{/if}}
 
 {{#if sidenav}}
-<ngx-side-nav></ngx-side-nav>
-{{/if}}
+<ngx-sidenav-container>
+  {{#if sidenav.left}}
+  <ngx-sidenav type="{{sidenav.left}}" opened="open" align="left">
+    <p>Sidenav Left</p>
+  </ngx-sidenav>
+  {{/if}}
 
-<ngx-grid {{#if fluid}}type="fluid"{{/if}}>
-{{#times rows}}
-  <ngx-row>
-    {{#times cols}}
-      <ngx-col>Col {{@index}}</ngx-col>
-    {{/times}}
-  </ngx-row>
-{{/times}}
-</ngx-grid>
+  {{#if sidenav.right}}
+  <ngx-sidenav type="{{sidenav.right}}" opened="open" align="right">
+    <p>Sidenav Right</p>
+  </ngx-sidenav>
+  {{/if}}
+
+  <main class="main">
+    <h1>Main Content</h1>
+
+    <ngx-grid{{#if fluid}} type="fluid"{{/if}}>
+      {{#times rows}}
+      <ngx-row>
+        {{#times cols}}
+        <ngx-col>Col {{@index}}</ngx-col>
+        {{/times}}
+      </ngx-row>
+      {{/times}}
+    </ngx-grid>
+  </main>
+</ngx-sidenav-container>
+{{/if}}

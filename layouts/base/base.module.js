@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NgxjsModule } from 'ngx-core';
 import { {{baseComponent}}Component } from './{{baseComponentFile}}.component';
 import { {{baseComponent}}RouteModule } from './routes';
 
 @NgModule({
-  imports:      [ CommonModule, {{baseComponent}}RouteModule ],
+  imports:      [ CommonModule, {{baseComponent}}RouteModule, NgxjsModule ],
   declarations: [ {{baseComponent}}Component ],
   exports:      [ ],
   providers:    [ ]

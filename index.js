@@ -3,43 +3,66 @@
 var program = require('commander');
 var fs = require('fs');
 var path = require('path');
-var generateGrid = require('./layouts/grid/grid.layout');
+var generate = require('./generators');
 
 program
   .arguments('<cmd> <component>')
+  .option('--config <path>', 'Config Path')
+  .option('--output <path>', 'Output Path')
   .option('--main <main>', 'Generator main layout grid|tabbar|list|feed')
   .option('--rows [rows]', 'Rows number')
   .option('--cols [cols]', 'Cols number')
   .option('--fluid [fluid]', 'Use fluid')
-  .option('--side-nav [side-nav]', 'Generator side-nav left or right | Default left')
+  .option('--sidenav [sidenav]', 'Generator sidenav left or right | Default left')
   .option('--toolbar', 'Generator toolbar')
   .action(function (cmd, component) {
 
-    let main = program.main;
-    let sideNav = program.sideNav;
-    let toolbar = program.toolbar;
-    let rows = program.rows;
-    let cols = program.cols;
-    let fluid = program.fluid;
+    var defaultConfig = getDefaultConfig();
+    var outputPath = path.join(__dirname, program.output || '.');
 
-    if (cmd === 'g' || cmd === 'generate') {
+    var config;
 
-      if (main != undefined) {
-        if (main === 'grid') {
-          generateGrid(component, rows, cols, sideNav, toolbar, fluid);
-        } else if (main === 'tabbar') {
-          console.log('In Process');
-          // generateTabbar('tabbar', component, componentFile);
-        } else if (main === 'list') {
-          console.log('In Process');
-          // generateList('list', component, componentFile);
-        } else if (main === 'feed') {
-          console.log('In Process');
-          // generateFeed('feed', component, componentFile);
+    if (program.config) {
+      config = require(path.resolve(__dirname, path.resolve(__dirname, program.config)));
+    }
+
+    var options = {};
+
+    if (config) {
+      options = {
+        main: {
+          card: config.main && config.main.card,
+          list: config.main && config.main.list,
+        },
+        toolbar: config.toolbar,
+        tabbar: config.tabbar,
+      }
+
+      if (config.sidenav) {
+        if (config.sidenav.left || config.sidenav.right) {
+          options.sidenav = config.sidenav;
+        } else {
+          options.sidenav = defaultConfig.sidenav
+        }
+      }
+
+      if (config.main.grid) {
+        if (config.main.grid.rows || config.main.grid.cols) {
+          options.main.grid = {
+            rows: config.main && config.main.grid.rows || defaultConfig.main.grid.rows,
+            cols: config.main && config.main.grid.cols || defaultConfig.main.grid.cols,
+          }
+        } else {
+          options.main.grid = defaultConfig.main.grid;
         }
       }
     }
 
-    // console.log('cmd: %s; component: %s; main: %s; side-nav: %s; toolbar %s', cmd, component, program.main, program.sideNav, program.toolbar);
+    generate(component, options, outputPath);
   })
   .parse(process.argv);
+
+
+function getDefaultConfig() {
+  return require(path.resolve(__dirname, path.resolve(__dirname, 'default-config.js')));
+}

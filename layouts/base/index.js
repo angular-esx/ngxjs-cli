@@ -1,2 +1,2 @@
-export * from './{{baseComponentFile}}.module';
-export * from './{{baseComponentFile}}.component';
+export { {{baseComponent}}Module } from './{{baseComponentFile}}.module';
+export { {{baseComponent}}Component } from './{{baseComponentFile}}.component';
